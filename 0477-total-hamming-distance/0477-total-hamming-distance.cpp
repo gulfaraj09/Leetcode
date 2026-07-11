@@ -1,12 +1,13 @@
 class Solution {
 public:
     int totalHammingDistance(vector<int>& nums) {
-        int ans = 0, n = nums.size();
-        for(int i = 0; i < n; i++){
-            for(int j = i; j < n; j++){
-                ans += __builtin_popcount(nums[i] ^ nums[j]);
-            }
+        int total = 0, n = nums.size();
+        for (int j=0;j<32;j++) {
+            int bitCount = 0;
+            for (int i=0;i<n;i++) 
+                bitCount += (nums[i] >> j) & 1;
+            total += bitCount*(n - bitCount);
         }
-        return ans;
+        return total;
     }
 };
