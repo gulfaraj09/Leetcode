@@ -17,10 +17,13 @@ public:
 
         for(int i = 0; i < len1; ++i){
             if(j == len2)break;
-            if(word1[i] == word2[j] || (skip == 0 && (j == len2 - 1 || i < dp[j + 1]))){
-                skip  += (word1[i] != word2[j] ? 1: 0);
+            if(word1[i] == word2[j]){
                 ans.push_back(i);
-                j += 1;
+                j++;
+            } else if(skip == 0 && (j == len2 - 1 || i < dp[j + 1])){
+                ans.push_back(i);
+                j++;
+                skip = 1;
             }
         }
         return j == len2 ? ans: vector<int>();
